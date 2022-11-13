@@ -94,4 +94,28 @@ router.route('/edit/:id').get(ensureAuth, async (req, res) => {
   }
 })
 
+/**
+ * @description Delete story
+ * @route DELETE /stories/:id
+ */
+router.route('/:id').delete(ensureAuth, async (req, res) => {
+  try {
+    const story = await Story.findById(req.params.id)
+
+    if (!story) {
+      return res.render('error/404')
+    }
+
+    if (story.user.toString() !== req.user.id.toString()) {
+      return res.redirect('/stories')
+    }
+
+    await story.remove()
+    res.redirect('/dashboard')
+  } catch (err) {
+    console.error(err)
+    res.render('error/500')
+  }
+})
+
 module.exports = router
