@@ -12,14 +12,19 @@
 
     <link rel='stylesheet' href='/styles/main.css' />
 
-    <!-- Compiled and minified JavaScript | https://materializecss.com/ -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js' defer></script>
-
     <title>StoryBooks</title>
   </head>
   <body>
+    {{> _headers}}
     <div class='container'>
       {{{body}}}
     </div>
+
+    <!-- Compiled and minified JavaScript | https://materializecss.com/ -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
+
+    <script>
+      M.Sidenav.init(document.querySelector('.sidenav'))
+    </script>
   </body>
 </html>
