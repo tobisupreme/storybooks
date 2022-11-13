@@ -7,12 +7,17 @@ const session = require('express-session')
 const CONFIG = require('./config/config')
 const indexRouter = require('./routes/index')
 const authRouter = require('./routes/auth')
+const storyRouter = require('./routes/story')
 const MongoStore = require('connect-mongo')
 
 // passport config
 require(path.join(__dirname, 'config', 'passport.js'))(passport)
 
 const app = express()
+
+// body parser
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 // Morgan: use logger in development mode only
 process.env.NODE_ENV === 'development' ? app.use(morgan('dev')) : true
@@ -40,5 +45,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 // Routes
 app.use('/', indexRouter)
 app.use('/auth', authRouter)
+app.use('/stories', storyRouter)
 
 module.exports = app
