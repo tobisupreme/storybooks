@@ -11,6 +11,20 @@ router.route('/add').get(ensureAuth, (req, res) => {
 })
 
 /**
+ * @description Show all stories
+ * @route GET /stories
+ */
+router.route('/').get(ensureAuth, async (req, res) => {
+  try {
+    const stories = await Story.find({ status: 'public' }).populate('user').sort({ createdAt: -1 }).lean()
+    res.render('stories/index', { stories })
+  } catch (err) {
+    console.error(err)
+    res.render('error/500')
+  }
+})
+
+/**
  * @description Create new story
  * @route POST /stories
  */
@@ -21,7 +35,6 @@ router.route('/').post(ensureAuth, async (req, res) => {
       title,
       body,
       status,
-      user: req.user.id
     }
     await Story.create(newStory)
     res.redirect('/dashboard')

@@ -42,6 +42,12 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+// make req.user available to other routes
+app.use((req, res, next) => {
+  res.locals.user = req.user || null
+  next()
+})
+
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')))
 
