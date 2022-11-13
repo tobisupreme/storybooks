@@ -21,7 +21,7 @@ module.exports = (passport) => {
         }
 
         try {
-          let user = await User.findOne({ googleId: profile._json.id })
+          let user = await User.findOne({ googleId: profile._json.sub })
 
           if (user) {
             return done(null, user)
