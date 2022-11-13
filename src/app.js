@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const morgan = require('morgan')
 const { engine } = require('express-handlebars')
+const methodOverride = require('method-override')
 const passport = require('passport')
 const session = require('express-session')
 const CONFIG = require('./config/config')
@@ -18,6 +19,9 @@ const app = express()
 // body parser
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+
+// method override
+app.use(methodOverride('_method'))
 
 // Morgan: use logger in development mode only
 process.env.NODE_ENV === 'development' ? app.use(morgan('dev')) : true
