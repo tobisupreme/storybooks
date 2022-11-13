@@ -22,8 +22,11 @@ app.use(express.json())
 // Morgan: use logger in development mode only
 process.env.NODE_ENV === 'development' ? app.use(morgan('dev')) : true
 
+// Handlebars helpers
+const helper = require('./helpers/hbs')
+
 // Handlebars: view engine setup
-app.engine('hbs', engine({ defaultLayout: 'main', extname: 'hbs' }))
+app.engine('hbs', engine({ defaultLayout: 'main', extname: 'hbs', helpers: helper }))
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'views'))
 
