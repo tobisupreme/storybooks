@@ -38,7 +38,7 @@ module.exports = (passport) => {
 
   passport.serializeUser((user, cb) => {
     process.nextTick(() => {
-      cb(null, { id: user.id, username: user.username, name: user.name })
+      cb(null, { id: user.id, firstName: user.firstName, lastName: user.lastName, image: user.image })
     })
   })
 
