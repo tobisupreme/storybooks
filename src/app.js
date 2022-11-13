@@ -7,6 +7,7 @@ const session = require('express-session')
 const CONFIG = require('./config/config')
 const indexRouter = require('./routes/index')
 const authRouter = require('./routes/auth')
+const MongoStore = require('connect-mongo')
 
 // passport config
 require(path.join(__dirname, 'config', 'passport.js'))(passport)
@@ -26,6 +27,7 @@ app.use(session({
   secret: CONFIG.SECRET,
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: CONFIG.DBURI })
 }))
 
 // Passport middleware
