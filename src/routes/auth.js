@@ -24,9 +24,10 @@ router.route('/google/callback').get(
  * @route GET /auth/logout
  */
 router.route('/logout').get((req, res) => {
-  req.logout(
+  req.logOut((err) => {
+    if (err) console.error(err)
     res.redirect('/')
-  )
+  })
 })
 
 module.exports = router
