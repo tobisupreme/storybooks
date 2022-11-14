@@ -16,7 +16,7 @@ git clone https://github.com/tobisupreme/blogolicious.git
 npm install
 ```
 
-#### 3. Update .env with [example.env](https://github.com/tobisupreme/blogolicious/blob/main/example.env)
+#### 3. Update .env with [example.env](https://github.com/tobisupreme/storybooks/blob/main/example.env)
 
 #### 4. Run a development server
 
